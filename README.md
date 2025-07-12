@@ -49,20 +49,7 @@ Docker Compose v2.0+
 
 支持 sudo 权限的 SSH 用户
 
-🚀 快速开始
-安装方法
-bash
-# 克隆仓库
-git clone https://github.com/yourusername/docker-deployer.git
 
-# 进入项目目录
-cd docker-deployer
-
-# 安装依赖
-pip install -r requirements.txt
-运行应用
-bash
-python deploy_tool.py
 🖥️ 界面使用指南
 配置区域
 服务器信息：
@@ -194,4 +181,4 @@ Fork 项目仓库
 
 📬 联系信息
 如有任何问题或建议，请联系：
-your.email@example.com# sshcomposer
+baggy1917@gmail.com
