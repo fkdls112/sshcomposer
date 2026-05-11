@@ -1,55 +1,28 @@
-name: Build and Release
+name: Build EXE
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: write
-  actions: read
-
 jobs:
-  build-windows:
+  build:
     runs-on: windows-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    
-    - name: Build with PyInstaller
-      run: |
-        python build.py
-      shell: cmd
-    
-    - name: Check output
-      run: |
-        dir dist\
-      shell: cmd
-    
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: SSHComposer-Windows
-        path: dist/SSHComposer.exe
-    
-    - name: Create Release
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: softprops/action-gh-release@v1
-      with:
-        files: dist/SSHComposer.exe
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: pip install PyQt5 paramiko scp pyinstaller
+
+      - name: 构建 EXE
+        run: python build.py
+
+      - name: 上传 EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: SSHComposer
+          path: dist/SSHComposer.exe
