@@ -1,9 +1,13 @@
-name: Build EXE
+name: Build and Release
 
 on:
   push:
-    branches: [main]
+    tags:
+      - 'v*'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -21,8 +25,17 @@ jobs:
       - name: 构建 EXE
         run: python build.py
 
-      - name: 上传 EXE
+      - name: 上传 Artifact
         uses: actions/upload-artifact@v4
         with:
           name: SSHComposer
           path: dist/SSHComposer.exe
+
+      - name: 创建 Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/SSHComposer.exe
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
