@@ -46,7 +46,10 @@ class DeployThread(QThread):
                 remote_dir=self.config['remote_dir'],
                 use_sudo=self.config['use_sudo']
             )
-            self.finished.emit(True, "Deploy success!")
+            if success:
+                self.finished.emit(True, "Deploy success!")
+            else:
+                self.finished.emit(False, "Deploy failed: unknown error")
         except Exception as e:
             self.finished.emit(False, str(e))
 
@@ -209,7 +212,8 @@ class MainWindow(QMainWindow):
         return {
             **server_config,
             'local_file': local_file,
-            'remote_dir': remote_dir
+            'remote_dir': remote_dir,
+            'use_sudo': True
         }
     
     def start_deploy(self):
@@ -265,7 +269,7 @@ def main():
     
     # Set app info
     app.setApplicationName("SSH Composer")
-    app.setApplicationVersion("1.0.0")
+    app.setApplicationVersion("1.0.6")
     app.setOrganizationName("fkdls112")
     
     window = MainWindow()

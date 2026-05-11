@@ -1,25 +1,14 @@
-# Docker Compose 部署工具
+# SSH Composer — Docker Compose 远程部署工具 v1.0.6
 
 ## 📦 简介  
-Docker Compose 部署工具是一个基于 PyQt5 的图形化应用程序，旨在简化将 Docker Compose 项目部署到远程服务器的过程。通过直观的用户界面，用户可以轻松配置服务器连接信息、选择 Compose 文件，并一键完成部署操作。
+SSH Composer 是一个基于 PyQt5 的图形化工具，通过 SSH 将 Docker Compose 项目一键部署到远程 Linux 服务器。配置服务器信息、选择 Compose 文件，点击部署即可自动完成上传、启动和验证。
 
-## ✨ 核心功能  
-### 服务器连接管理：
-- 支持 SSH 连接配置（IP、端口、用户名、密码）
-- 自动处理 sudo 权限提升
-
-### 文件传输：
-- 本地 Docker Compose 文件上传到远程服务器
-- 自定义目标部署目录
-
-### 服务管理：
-- 在远程服务器上执行 `docker compose up -d`
-- 自动验证服务启动状态
-
-### 可视化反馈：
-- 实时部署进度显示
-- 彩色日志输出（信息、警告、错误）
-- 详细错误报告
+## ✨ 核心功能
+- **SSH 连接**：IP/端口/用户名/密码，自动 sudo 提权
+- **文件上传**：本地 docker-compose.yml 通过 SCP 传输到目标目录
+- **一键部署**：自动执行 `docker compose up -d`
+- **环境检测**：部署前自动检查 Docker 和 Docker Compose 是否可用
+- **实时日志**：彩色日志（信息/成功/警告/错误），部署进度条
 
 ## 🛠️ 系统要求  
 ### 客户端（运行本工具）
@@ -73,11 +62,11 @@ Docker Compose 部署工具是一个基于 PyQt5 的图形化应用程序，旨�
 ### 方法一：直接运行源码
 ```bash
 pip install -r requirements.txt
-python -m src.main
+python main.py
 ```
 
-### 方法二：使用打包版本
-下载 Releases 中的 `SSHComposer-Setup.exe` 安装程序，双击安装即可。
+### 方法二：下载打包 EXE
+从 [Releases](https://github.com/fkdls112/sshcomposer/releases) 下载最新 `SSHComposer.exe`，双击运行即可。
 
 ## 📜 开源许可  
 本项目采用 **MIT 许可证** 开源，允许自由使用、修改和分发。
