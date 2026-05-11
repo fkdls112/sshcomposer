@@ -26,7 +26,7 @@ def build():
     clean()
 
     args = [
-        os.path.join(SRC_DIR, 'main.py'),
+        'main.py',
         '--name=SSHComposer',
         '--windowed',
         '--onefile',
