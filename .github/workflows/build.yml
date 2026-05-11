@@ -31,6 +31,12 @@ jobs:
     - name: Build with PyInstaller
       run: |
         python build.py
+      shell: cmd
+    
+    - name: Check output
+      run: |
+        dir dist\
+      shell: cmd
     
     - name: Upload artifact
       uses: actions/upload-artifact@v4
